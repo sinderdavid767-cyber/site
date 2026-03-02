@@ -1,0 +1,463 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MY BRAND — Создание сайтов</title>
+  <meta name="description" content="MY BRAND — сайты, которые выглядят дорого и приводят клиентов. RU/UA/EN." />
+
+  <style>
+    :root{
+      --bg:#05060a;
+      --card:#0b1220;
+      --card2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#a1a1aa;
+      --line:rgba(255,255,255,.10);
+      --accent:#ff5b7a;
+      --accent2:#ffb3c1;
+      --ok:#9cff9c;
+      --radius:18px;
+      --shadow:0 20px 50px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:radial-gradient(1200px 600px at 20% -10%, rgba(255,91,122,.25), transparent 60%),
+                 radial-gradient(900px 600px at 80% 0%, rgba(255,179,193,.14), transparent 60%),
+                 var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px}
+    .topbar{
+      position:sticky; top:0; z-index:999;
+      backdrop-filter: blur(10px);
+      background:rgba(5,6,10,.60);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 25px rgba(255,91,122,.7)}
+    .menu{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .menu a{opacity:.85}
+    .menu a:hover{opacity:1}
+
+    .btn{
+      border:1px solid rgba(255,91,122,.35);
+      background:linear-gradient(180deg, rgba(255,91,122,.25), rgba(255,91,122,.08));
+      color:var(--text);
+      padding:10px 14px;border-radius:999px;
+      cursor:pointer;
+      box-shadow:0 12px 25px rgba(0,0,0,.35);
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:active{transform:translateY(0px)}
+
+    /* Language */
+    .lang{
+      position:relative;
+      z-index:2000; /* важно, чтобы меню было кликабельным */
+    }
+    .langBtn{
+      display:flex;align-items:center;gap:10px;
+      border:1px solid var(--line);
+      background:rgba(11,18,32,.90);
+      padding:10px 12px;border-radius:999px;
+      cursor:pointer;
+      min-width:94px;
+    }
+    .flag{
+      width:12px;height:12px;border-radius:4px;
+      background:linear-gradient(180deg, var(--accent2), var(--accent));
+      box-shadow:0 0 18px rgba(255,91,122,.45);
+      flex:0 0 auto;
+    }
+    .caret{opacity:.75}
+    .langMenu{
+      position:absolute; right:0; top:44px;
+      width:140px;
+      background:#0b1220;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:none;
+    }
+    .langMenu button{
+      width:100%;
+      background:transparent;
+      color:var(--text);
+      border:0;
+      padding:12px 12px;
+      text-align:left;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .langMenu button:hover{background:rgba(255,255,255,.06)}
+    .langMenu .sub{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:2px}
+
+    /* Sections */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    @media(max-width:900px){ .hero{grid-template-columns:1fr} }
+    .card{
+      background:rgba(11,18,32,.85);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .kicker{color:var(--muted);font-size:13px}
+    h1{margin:10px 0 10px;font-size:40px;line-height:1.05}
+    @media(max-width:520px){h1{font-size:32px}}
+.lead{color:var(--muted);line-height:1.45}
+    .pillRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(15,23,42,.7);
+      padding:8px 10px;border-radius:999px;
+      font-size:12px;color:var(--text);
+      opacity:.92;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+    @media(max-width:950px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+    .miniTitle{font-weight:800;margin:0 0 6px}
+    .miniText{margin:0;color:var(--muted);line-height:1.35;font-size:14px}
+
+    /* Form */
+    form{margin-top:10px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:650px){.row{grid-template-columns:1fr}}
+    label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px}
+    input, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(15,23,42,.65);
+      color:var(--text);
+      padding:12px 12px;
+      outline:none;
+    }
+    textarea{min-height:110px;resize:vertical}
+    input:focus, textarea:focus{border-color:rgba(255,91,122,.55);box-shadow:0 0 0 3px rgba(255,91,122,.15)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .hint{margin-top:10px;color:var(--muted);font-size:12px}
+    .sectionTitle{font-size:18px;font-weight:900;margin:0 0 6px}
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <span class="dot"></span>
+          <div>
+            <div>MY BRAND</div>
+            <div class="kicker" data-i18n="brand_sub">Создание сайтов</div>
+          </div>
+        </div>
+
+        <div class="menu">
+          <a href="#services" data-i18n="nav_services">Услуги</a>
+          <a href="#about" data-i18n="nav_about">О нас</a>
+          <a href="#how" data-i18n="nav_how">Как работаем</a>
+          <a href="#contact" data-i18n="nav_contact">Заявка</a>
+
+          <div class="lang" id="lang">
+            <button class="langBtn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
+              <span class="flag"></span>
+              <strong id="langCode">RU</strong>
+              <span class="caret">▼</span>
+            </button>
+            <div class="langMenu" id="langMenu">
+              <button type="button" data-lang="ru">RU <span class="sub">Русский</span></button>
+              <button type="button" data-lang="ua">UA <span class="sub">Українська</span></button>
+              <button type="button" data-lang="en">EN <span class="sub">English</span></button>
+            </div>
+          </div>
+
+          <a class="btn" href="#contact" data-i18n="nav_cta">Оставить заявку</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div class="card">
+        <div class="kicker" data-i18n="kicker">Работаем по всей Европе • Онлайн</div>
+        <h1 data-i18n="h1">Создаём сайты, которые выглядят дорого и приводят клиентов</h1>
+        <p class="lead" data-i18n="lead">
+          MY BRAND — сайты под бизнес и личные проекты. Чистый дизайн, мобильная версия, структура под заявки.
+          Языки: RU / UA / EN.
+        </p>
+
+        <div class="pillRow">
+          <span class="pill" data-i18n="pill1">Европа: NL/DE/BE/FR/ES</span>
+          <span class="pill" data-i18n="pill2">Mobile-first</span>
+          <span class="pill" data-i18n="pill3">Под ключ: дизайн + текст</span>
+          <span class="pill" data-i18n="pill4">Быстро, но качественно</span>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#contact" data-i18n="cta1">Получить консультацию</a>
+          <a class="btn" href="#services" style="border-color:rgba(255,255,255,.16);background:rgba(15,23,42,.6)" data-i18n="cta2">Смотреть услуги</a>
+        </div>
+      </div>
+
+<div class="card" id="how">
+        <div class="sectionTitle" data-i18n="how_title">Формат под задачу</div>
+        <p class="miniText" data-i18n="how_text">Нужен лендинг, сайт-визитка или редизайн? Подберём решение и сделаем, чтобы “смотрелось дорого”.</p>
+        <div style="margin-top:12px;display:grid;gap:10px">
+          <div class="pill" data-i18n="step1">1) Созвон — узнаём цель и примеры</div>
+          <div class="pill" data-i18n="step2">2) Макет — дизайн + структура</div>
+          <div class="pill" data-i18n="step3">3) Сборка — адаптив + скорость</div>
+          <div class="pill" data-i18n="step4">4) Запуск — публикуем и проверяем</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="card" style="margin-top:18px">
+      <div class="sectionTitle" data-i18n="services_title">Услуги</div>
+      <div class="grid">
+        <div class="card" style="padding:14px;background:rgba(15,23,42,.55)">
+          <p class="miniTitle" data-i18n="s1_t">Лендинг (1 страница)</p>
+          <p class="miniText" data-i18n="s1_d">Структура под заявки, блоки доверия, быстрый запуск.</p>
+        </div>
+        <div class="card" style="padding:14px;background:rgba(15,23,42,.55)">
+          <p class="miniTitle" data-i18n="s2_t">Сайт-визитка (3–6 страниц)</p>
+          <p class="miniText" data-i18n="s2_d">О вас, услуги, портфолио/кейсы, FAQ, контакты.</p>
+        </div>
+        <div class="card" style="padding:14px;background:rgba(15,23,42,.55)">
+          <p class="miniTitle" data-i18n="s3_t">Доработки и редизайн</p>
+          <p class="miniText" data-i18n="s3_d">Исправим ошибки, улучшим скорость и мобильную версию.</p>
+        </div>
+        <div class="card" style="padding:14px;background:rgba(15,23,42,.55)">
+          <p class="miniTitle" data-i18n="s4_t">Запуск под ключ</p>
+          <p class="miniText" data-i18n="s4_d">Домен/хостинг, публикация, базовое SEO и мета-описания.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="card" style="margin-top:18px">
+      <div class="sectionTitle" data-i18n="about_title">О нас</div>
+      <p class="miniText" data-i18n="about_text">
+        Делаем понятные сайты с сильной подачей: дизайн, структура, тексты и форма заявок.
+        Главная цель — чтобы сайт выглядел дороже конкурентов и приводил клиентов.
+      </p>
+    </section>
+
+    <section id="contact" class="card" style="margin-top:18px">
+      <div class="sectionTitle" data-i18n="contact_title">Оставить заявку</div>
+      <p class="miniText" data-i18n="contact_sub">Вы оставляете контакты — мы сами вам напишем.</p>
+
+      <!-- Netlify Form (ВАЖНО: name="lead" и hidden form-name) -->
+      <form id="leadForm" name="lead" method="POST" data-netlify="true" action="/thanks.html"> netlify-honeypot="bot-field"
+        <input type="hidden" name="form-name" value="lead" />
+        <p style="display:none">
+          <label>Don’t fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="row">
+          <div>
+            <label for="name" data-i18n="f_name">Имя</label>
+            <input id="name" name="name" required placeholder="Например: Alex" />
+          </div>
+          <div>
+            <label for="contactField" data-i18n="f_contact">Контакт (телефон / WhatsApp / email)</label>
+            <input id="contactField" name="contact" required placeholder="+31... / email..." />
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <label for="need" data-i18n="f_need">Что нужно?</label>
+          <input id="need" name="need" placeholder="Лендинг / визитка / редизайн / другое" />
+        </div>
+
+        <div style="margin-top:10px">
+          <label for="siteLang" data-i18n="f_siteLang">Язык сайта</label>
+          <input id="siteLang" name="site_lang" placeholder="RU / UA / EN / NL / DE / FR / ES" />
+        </div>
+
+<div style="margin-top:10px">
+          <label for="msg" data-i18n="f_msg">Коротко о проекте</label>
+          <textarea id="msg" name="message" placeholder="Ниша, что продаёте, примеры сайтов, пожелания..."></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn" type="submit" data-i18n="f_send">Отправить заявку</button>
+        </div>
+
+        <div class="hint" data-i18n="hint">
+          После отправки вас перекинет на страницу “Спасибо”. Заявки вы увидите в Netlify → Forms.
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // --- i18n ---
+    const I18N = {
+      ru: {
+        brand_sub:"Создание сайтов",
+        nav_services:"Услуги", nav_about:"О нас", nav_how:"Как работаем", nav_contact:"Заявка", nav_cta:"Оставить заявку",
+        kicker:"Работаем по всей Европе • Онлайн",
+        h1:"Создаём сайты, которые выглядят дорого и приводят клиентов",
+        lead:"MY BRAND — сайты под бизнес и личные проекты. Чистый дизайн, мобильная версия, структура под заявки. Языки: RU / UA / EN.",
+        pill1:"Европа: NL/DE/BE/FR/ES", pill2:"Mobile-first", pill3:"Под ключ: дизайн + текст", pill4:"Быстро, но качественно",
+        cta1:"Получить консультацию", cta2:"Смотреть услуги",
+        how_title:"Формат под задачу",
+        how_text:"Нужен лендинг, сайт-визитка или редизайн? Подберём решение и сделаем, чтобы “смотрелось дорого”.",
+        step1:"1) Созвон — узнаём цель и примеры",
+        step2:"2) Макет — дизайн + структура",
+        step3:"3) Сборка — адаптив + скорость",
+        step4:"4) Запуск — публикуем и проверяем",
+        services_title:"Услуги",
+        s1_t:"Лендинг (1 страница)", s1_d:"Структура под заявки, блоки доверия, быстрый запуск.",
+        s2_t:"Сайт-визитка (3–6 страниц)", s2_d:"О вас, услуги, портфолио/кейсы, FAQ, контакты.",
+        s3_t:"Доработки и редизайн", s3_d:"Исправим ошибки, улучшим скорость и мобильную версию.",
+        s4_t:"Запуск под ключ", s4_d:"Домен/хостинг, публикация, базовое SEO и мета-описания.",
+        about_title:"О нас",
+        about_text:"Делаем понятные сайты с сильной подачей: дизайн, структура, тексты и форма заявок. Главная цель — чтобы сайт выглядел дороже конкурентов и приводил клиентов.",
+        contact_title:"Оставить заявку",
+        contact_sub:"Вы оставляете контакты — мы сами вам напишем.",
+        f_name:"Имя",
+        f_contact:"Контакт (телефон / WhatsApp / email)",
+        f_need:"Что нужно?",
+        f_siteLang:"Язык сайта",
+        f_msg:"Коротко о проекте",
+        f_send:"Отправить заявку",
+        hint:"После отправки вас перекинет на страницу “Спасибо”. Заявки вы увидите в Netlify → Forms."
+      },
+      ua: {
+        brand_sub:"Створення сайтів",
+        nav_services:"Послуги", nav_about:"Про нас", nav_how:"Як працюємо", nav_contact:"Заявка", nav_cta:"Залишити заявку",
+        kicker:"Працюємо по всій Європі • Онлайн",
+        h1:"Створюємо сайти, які виглядають дорого і приводять клієнтів",
+        lead:"MY BRAND — сайти для бізнесу та особистих проєктів. Чистий дизайн, мобільна версія, структура під заявки. Мови: RU / UA / EN.",
+        pill1:"Європа: NL/DE/BE/FR/ES", pill2:"Mobile-first", pill3:"Під ключ: дизайн + текст", pill4:"Швидко, але якісно",
+        cta1:"Отримати консультацію", cta2:"Дивитись послуги",
+        how_title:"Формат під задачу",
+        how_text:"Потрібен лендинг, сайт-візитка чи редизайн? Підберемо рішення, щоб виглядало “дорого”.",
+        step1:"1) Дзвінок — цілі та приклади",
+        step2:"2) Макет — дизайн + структура",
+        step3:"3) Збірка — адаптив + швидкість",
+        step4:"4) Запуск — публікуємо й перевіряємо",
+        services_title:"Послуги",
+        s1_t:"Лендинг (1 сторінка)", s1_d:"Структура під заявки, блоки довіри, швидкий запуск.",
+        s2_t:"Сайт-візитка (3–6 сторінок)", s2_d:"Про вас, послуги, портфоліо/кейси, FAQ, контакти.",
+
+s3_t:"Доробки та редизайн", s3_d:"Виправимо помилки, покращимо швидкість та мобільну версію.",
+        s4_t:"Запуск під ключ", s4_d:"Домен/хостинг, публікація, базове SEO та мета-описи.",
+        about_title:"Про нас",
+        about_text:"Робимо зрозумілі сайти з сильною подачею: дизайн, структура, тексти та форма заявок. Ціль — щоб сайт виглядав дорожче конкурентів і приводив клієнтів.",
+        contact_title:"Залишити заявку",
+        contact_sub:"Ви залишаєте контакти — ми самі вам напишемо.",
+        f_name:"Ім’я",
+        f_contact:"Контакт (телефон / WhatsApp / email)",
+        f_need:"Що потрібно?",
+        f_siteLang:"Мова сайту",
+        f_msg:"Коротко про проєкт",
+        f_send:"Надіслати заявку",
+        hint:"Після відправки вас перекине на сторінку “Дякуємо”. Заявки побачите в Netlify → Forms."
+      },
+      en: {
+        brand_sub:"Website building",
+        nav_services:"Services", nav_about:"About", nav_how:"How we work", nav_contact:"Request", nav_cta:"Send request",
+        kicker:"Working across Europe • Online",
+        h1:"We build websites that look premium and bring clients",
+        lead:"MY BRAND — websites for business and personal projects. Clean design, mobile version, lead-focused structure. Languages: RU / UA / EN.",
+        pill1:"Europe: NL/DE/BE/FR/ES", pill2:"Mobile-first", pill3:"Turnkey: design + copy", pill4:"Fast, but quality",
+        cta1:"Get consultation", cta2:"View services",
+        how_title:"Choose the format",
+        how_text:"Need a landing, small business site or redesign? We'll pick the best solution and make it look premium.",
+        step1:"1) Call — goals & examples",
+        step2:"2) Layout — design + structure",
+        step3:"3) Build — responsive + speed",
+        step4:"4) Launch — publish & test",
+        services_title:"Services",
+        s1_t:"Landing page (1 page)", s1_d:"Lead structure, trust blocks, quick launch.",
+        s2_t:"Business site (3–6 pages)", s2_d:"About, services, portfolio/cases, FAQ, contacts.",
+        s3_t:"Fixes & redesign", s3_d:"Fix issues, improve speed and mobile experience.",
+        s4_t:"Turnkey launch", s4_d:"Domain/hosting, publish, basic SEO & meta.",
+        about_title:"About",
+        about_text:"We create clear websites with strong presentation: design, structure, copy and lead form. Goal — premium look and real clients.",
+        contact_title:"Send a request",
+        contact_sub:"Leave contacts — we'll message you first.",
+        f_name:"Name",
+        f_contact:"Contact (phone / WhatsApp / email)",
+        f_need:"What do you need?",
+        f_siteLang:"Website language",
+        f_msg:"Short about your project",
+        f_send:"Send request",
+        hint:"After submit you’ll be redirected to “Thanks”. See submissions in Netlify → Forms."
+      }
+    };
+
+    let currentLang = localStorage.getItem("lang") || "ru";
+
+    function applyLang(lang){
+      currentLang = lang;
+      localStorage.setItem("lang", lang);
+      document.documentElement.lang = lang === "ua" ? "uk" : lang;
+      document.getElementById("langCode").textContent = lang.toUpperCase();
+
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        const txt = I18N[lang]?.[key];
+        if (txt) el.textContent = txt;
+      });
+    }
+
+    // --- Language menu ---
+    const langBtn = document.getElementById("langBtn");
+    const langMenu = document.getElementById("langMenu");
+
+    function openMenu(open){
+      langMenu.style.display = open ? "block" : "none";
+      langBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    langBtn.addEventListener("click", (e)=>{
+      e.stopPropagation();
+      openMenu(langMenu.style.display !== "block");
+    });
+
+    langMenu.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-lang]");
+      if(!btn) return;
+      applyLang(btn.dataset.lang);
+      openMenu(false);
+    });
+
+    document.addEventListener("click", ()=> openMenu(false));
+
+// --- Form: keep chosen lang for thanks.html ---
+    document.getElementById("leadForm").addEventListener("submit", ()=>{
+      localStorage.setItem("lang", currentLang);
+    });
+
+    // init
+    applyLang(currentLang);
+  </script>
+</body>
+</html>
